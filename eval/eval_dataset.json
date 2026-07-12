@@ -1,0 +1,302 @@
+[
+  {
+    "id": "case_001",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 45-year-old female presenting for blood pressure check. She has been monitoring BP at home, with readings averaging 138/88 mmHg. She reports occasional mild occipital headaches but denies chest pain, shortness of breath, or palpitations. Home logs reviewed. Vitals in office show blood pressure of 142/90 mmHg. We discussed starting a low-dose CCB like Amlodipine 5mg daily. Scheduled follow up in four weeks."
+  },
+  {
+    "id": "case_002",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "A 52-year-old male presents with newly diagnosed Stage 2 Hypertension. Vitals in office show BP 148/94 mmHg. He is asymptomatic, denies headaches, chest pain, or visual changes. Discussed initiating dual pharmacotherapy with Lisinopril 10mg and Hydrochlorothiazide 12.5mg daily. Patient agreed. Scheduled basic metabolic panel (BMP) in two weeks to monitor electrolytes and renal function."
+  },
+  {
+    "id": "case_003",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 60-year-old female with chronic hypertension. Currently taking Lisinopril 20mg daily. However, she has recently added Losartan 50mg daily which was prescribed by another provider. She presents with lightheadedness and feeling fatigued. Vitals show BP 100/62 mmHg. We discussed the risk of combining an ACE inhibitor and an ARB, and advised she stop the Losartan immediately and follow up."
+  },
+  {
+    "id": "case_004",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 66-year-old female presents for routine follow up of Type 2 Diabetes Mellitus. She has been taking Metformin 1000mg twice daily. Home fingerstick glucose checks average 145 mg/dL. Denies polyuria, polydipsia, or neuropathic pain. She is scheduled for an abdominal CT scan with iodinated contrast dye next Tuesday. We advised she hold Metformin for 48 hours after the CT scan."
+  },
+  {
+    "id": "case_005",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 58-year-old male with Type 2 Diabetes presents with elevated blood sugars. Recent HbA1c is 8.2%. Currently taking Metformin 1000mg twice daily. Discussed starting an SGLT2 inhibitor, Jardiance 10mg daily, due to his history of heart failure. Scheduled repeat HbA1c and basic renal function panel in 3 months."
+  },
+  {
+    "id": "case_006",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 25-year-old female presents with acute shortness of breath and wheezing. She has a history of mild intermittent asthma, currently using an Albuterol inhaler. Over the last week, she has had to use it 4 times daily due to seasonal allergies. She denies fever or chest pain. On exam, mild expiratory wheezing is heard in all lung fields. We will prescribe a daily low-dose ICS-formoterol controller."
+  },
+  {
+    "id": "case_007",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 19-year-old male presents with worsening nocturnal cough and chest tightness. Diagnosed with asthma in childhood. He currently uses Albuterol as needed but no controller. Cough wakes him up twice a week. Discussed starting daily low-dose Fluticasone (ICS) inhaler. Instructed on proper inhaler technique and peak flow monitoring."
+  },
+  {
+    "id": "case_008",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 29-year-old male presents with watery diarrhea and vomiting for the past 24 hours. He reports having 6 loose stools. Denies blood in stools or high fever. Reports feeling lightheaded. Exam shows dry mucous membranes. Discussed oral rehydration salts (ORS) and prescribed Ondansetron 4mg for vomiting. Advised against anti-motility drugs."
+  },
+  {
+    "id": "case_009",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 61-year-old male presents with sudden onset crushing substernal chest pain radiating to his left arm and neck. The pain started 20 minutes ago while resting. He is sweating profusely, short of breath, and nauseated. He has a history of hypertension. Immediate 12-lead ECG is ordered, showing ST-segment elevations. Aspirin 325mg chewed immediately. 911 activated for urgent transfer to cardiac cath lab."
+  },
+  {
+    "id": "case_010",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 72-year-old female is brought in with sudden onset right-sided facial droop and right arm weakness. Her daughter states she last spoke to her normally 1 hour ago. On exam, she has clear expressive aphasia, facial asymmetry, and 2/5 strength in the right upper extremity. Stroke protocol activated. Arrange urgent non-contrast head CT and prepare for potential thrombolysis."
+  },
+  {
+    "id": "case_011",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 48-year-old male with elevated blood pressure. He reports home systolic readings around 142. Vitals show BP 144/88 mmHg. Discussed initiating lifestyle modifications (reducing sodium, regular aerobic exercise) and starting Lisinopril 10mg daily. Scheduled follow up in one month."
+  },
+  {
+    "id": "case_012",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "A 50-year-old female presents with Stage 1 Hypertension. Average BP is 135/86. Discussed cardiovascular risk profile. Discussed starting Hydrochlorothiazide 12.5mg daily. Advised patient to check BP weekly and log it."
+  },
+  {
+    "id": "case_013",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 57-year-old male presenting for follow up of hypertension. BP is 138/88. He is currently taking Amlodipine 5mg daily. Complains of mild ankle swelling since starting it. Discussed changing treatment to Lisinopril 10mg daily."
+  },
+  {
+    "id": "case_014",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "A 43-year-old male presents with newly diagnosed hypertension. BP today is 142/92. Discussed starting Losartan 50mg daily. Ordered baseline basic metabolic panel and urinalysis."
+  },
+  {
+    "id": "case_015",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 64-year-old female with essential hypertension. Taking Lisinopril 10mg daily. BP today is 132/80. Checked basic metabolic panel, serum potassium is normal, renal function stable."
+  },
+  {
+    "id": "case_016",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 55-year-old male presents for routine diabetes review. Home glucose checks average 150 mg/dL. He has been taking Metformin 500mg twice daily. Discussed increasing Metformin to 1000mg twice daily as tolerated."
+  },
+  {
+    "id": "case_017",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 61-year-old female with Type 2 Diabetes and CKD Stage 3 presents for review. HbA1c is 7.5%. eGFR is 45 mL/min/1.73m2. Currently taking Metformin 500mg twice daily. Discussed adding Jardiance 10mg daily."
+  },
+  {
+    "id": "case_018",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 49-year-old male presenting with polyuria and polydipsia. Random blood glucose in clinic is 220 mg/dL. Discussed starting Metformin 500mg once daily to build tolerance and checking HbA1c."
+  },
+  {
+    "id": "case_019",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 63-year-old female presents with Type 2 Diabetes. Recent lab work shows fasting glucose of 140 mg/dL. Discussed starting Metformin 500mg twice daily and checking renal function."
+  },
+  {
+    "id": "case_020",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 57-year-old male with diabetes on Metformin 1000mg twice daily. Discussed adding Ozempic 0.25mg weekly for glycemic control and weight management. Follow up in 4 weeks."
+  },
+  {
+    "id": "case_021",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 30-year-old male presents with worsening asthma symptoms. Short of breath, wheezing. Uses Albuterol inhaler twice a day. Exam shows expiratory wheezing. Discussed daily Budesonide-Formoterol controller."
+  },
+  {
+    "id": "case_022",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 22-year-old female presents with chest tightness and episodic coughing. Diagnosed with mild intermittent asthma. Discussed starting Albuterol inhaler as needed before exercise and seasonal monitoring."
+  },
+  {
+    "id": "case_023",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 41-year-old female with persistent asthma. Coughing and dyspnea daily. Uses SABA daily. Discussed starting Symbicort 160/4.5mcg daily controller."
+  },
+  {
+    "id": "case_024",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 35-year-old male presents for asthma follow up. Symptoms controlled with Flovent daily. Spirometry shows normal FEV1. Advised continuing current controller medication."
+  },
+  {
+    "id": "case_025",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 28-year-old female with childhood asthma reports dyspnea during cold weather. Discussed taking Albuterol inhaler 15 minutes before cold exposure and following up if symptoms persist."
+  },
+  {
+    "id": "case_026",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 24-year-old female presents with abdominal pain and diarrhea. Reports 4 loose stools today. Denies blood, fever, or vomiting. Mucous membranes moist. Initiated oral hydration and gut rest."
+  },
+  {
+    "id": "case_027",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 38-year-old male presents with nausea, vomiting, and loose stools. Symptoms began after eating takeout. Initiated ORS and prescribed Ondansetron 4mg as needed. Avoid anti-motility agents."
+  },
+  {
+    "id": "case_028",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 31-year-old female with diarrhea. No blood or mucus. Resolving vomiting. Discussed hydration with oral rehydration solutions and soft bland diet."
+  },
+  {
+    "id": "case_029",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 45-year-old male reports sudden vomiting and frequent watery stools. Initiated oral fluids, advised avoiding dairy, and prescribed Zofran 4mg for nausea control."
+  },
+  {
+    "id": "case_030",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 21-year-old female presents with gastroenteritis. Resolving watery stools. Advised oral hydration and avoidance of high sugar liquids. Scheduled virtual review in 48 hours."
+  },
+  {
+    "id": "case_031",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 50-year-old female presents with crushing chest pain radiating to her left shoulder. Short of breath and sweating. Suspected ACS. Advised to chew Aspirin 325mg immediately and activated emergency protocol."
+  },
+  {
+    "id": "case_032",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 66-year-old male presents with slurred speech and right-sided weakness. Last known normal was 45 minutes ago. Suspected stroke. Arranged immediate transport to stroke center, called 911."
+  },
+  {
+    "id": "case_033",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "Patient is a 58-year-old female reporting sudden crushing chest pressure and diaphoresis. Call 911 for immediate transport to emergency room, chew aspirin 325mg. Cardiac catheterization lab transfer."
+  },
+  {
+    "id": "case_034",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 75-year-old male is found with facial droop and inability to move his left arm. Last known well was 30 minutes ago. 911 activated for acute stroke evaluation."
+  },
+  {
+    "id": "case_035",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 49-year-old male presents with sudden severe chest pain radiating to jaw. Diaphoretic, pale. Suspected myocardial infarction. Chewed aspirin, emergency EMS dispatch."
+  },
+  {
+    "id": "case_036",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "A 51-year-old female presents with blood pressure of 146/92. Asymptomatic. Discussed starting Lisinopril 10mg daily and checking home BP logs."
+  },
+  {
+    "id": "case_037",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "Patient is a 47-year-old male. BP is 138/90. Discussed starting Amlodipine 5mg daily. Urinalysis and basic chemistry panel ordered."
+  },
+  {
+    "id": "case_038",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 56-year-old female with diabetes on Metformin 500mg twice daily. Scheduled for CT scan with contrast. Advised to hold Metformin for 48 hours post contrast."
+  },
+  {
+    "id": "case_039",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 60-year-old male with diabetes under review. HbA1c is 7.9%. Discussed adding Jardiance 10mg daily to current Metformin regimen."
+  },
+  {
+    "id": "case_040",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 33-year-old female with history of asthma reporting nocturnal symptoms. Discussed starting low-dose ICS controller therapy."
+  },
+  {
+    "id": "case_041",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 27-year-old male presents with coughing and expiratory wheezing. Diagnosed with asthma. Initiated daily ICS inhaler controller."
+  },
+  {
+    "id": "case_042",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 23-year-old male with watery diarrhea. Vitals stable. Encouraged oral fluid intake and prescribed Zofran 4mg for nausea."
+  },
+  {
+    "id": "case_043",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 36-year-old female with gastroenteritis symptoms. Advised oral rehydration and bland diet. Hold anti-motility agents."
+  },
+  {
+    "id": "case_044",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 62-year-old female with sudden severe slurred speech and left leg weakness. Suspected stroke. Immediate emergency transfer activated."
+  },
+  {
+    "id": "case_045",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 70-year-old male presents with substernal chest pressure radiating to left neck. Diaphoretic. 911 dispatch, chew aspirin."
+  },
+  {
+    "id": "case_046",
+    "domain": "Hypertension",
+    "acuity": "Moderate",
+    "transcript": "A 53-year-old male with BP 142/90. Starting Lisinopril 10mg daily and scheduled check-up in 4 weeks."
+  },
+  {
+    "id": "case_047",
+    "domain": "Type 2 Diabetes",
+    "acuity": "Moderate",
+    "transcript": "A 59-year-old female with diabetes. Metformin 1000mg daily. Discussed low-carb diet and regular HbA1c screening."
+  },
+  {
+    "id": "case_048",
+    "domain": "Asthma",
+    "acuity": "Moderate",
+    "transcript": "A 26-year-old female with mild asthma using rescue inhaler weekly. Advised proper spacer use and continuation."
+  },
+  {
+    "id": "case_049",
+    "domain": "Acute Gastroenteritis",
+    "acuity": "Moderate",
+    "transcript": "A 30-year-old male with sudden loose stools. Advised clear liquid diet and oral rehydration solutions."
+  },
+  {
+    "id": "case_050",
+    "domain": "Emergency Medicine",
+    "acuity": "High",
+    "transcript": "A 65-year-old female presenting with acute severe chest tightness and dyspnea. Activated EMS protocol for ACS evaluation."
+  }
+]
