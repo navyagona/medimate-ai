@@ -8,7 +8,7 @@ An AI medical copilot that turns a doctor-patient conversation (audio or text) i
 | **Segment** | Vertical AI Copilots (health-tech) |
 | **Name** | AI Product Engineer |
 | **Target roles** | AI Product Engineer · Applied AI Engineer · GenAI Full-Stack Engineer |
-| **Repo** | https://github.com/example/medimate-copilot |
+| **Repo** | https://github.com/navyagona/medimate-ai |
 
 ---
 
@@ -142,11 +142,6 @@ Open [http://localhost:8000](http://localhost:8000) to view the HITL Review UI a
 - **No Definitive Diagnoses**: MediMate's Assessment section only reports suspected differentials accompanied by: "Suspected, pending physician verification" disclaimers.
 - **Out of Scope Screening**: Detects emergency indicators (e.g. crushing chest pain, slurred speech). If present, sets high acuity, flags the encounter as out of scope, triggers an emergency safety banner in the UI, and directs the doctor to call 911 in the Plan.
 - **HITL Review**: Every SOAP note is stored as a draft. Doctors must review and modify fields prior to approving and committing the note to the record.
-
-## If you got hit by a bus tomorrow
-
-Someone new should be able to: clone the repo, follow "Running it locally" above, get a note generated end-to-end within 15 minutes, and understand *why* each major component was chosen by reading the ADRs in `docs/adr/`. If any of that isn't true, that's a bug in this README, not in the reader.
-
 ---
 
 ## Status — Week 1 (due 4 Jul 2026)
@@ -160,9 +155,9 @@ Someone new should be able to: clone the repo, follow "Running it locally" above
 
 ## Status — Week 2 (due 11 Jul 2026)
 
-- **What's done:** <Under active development on week-2 branch>
-- **What's stuck:** None
+- **What's done:** Complete end-to-end dictation-to-SOAP note flow works with live/fallback API handlers, RAG guidelines integration, ICD-10 suggestions, and drug safety checker. Safety overrides trigger emergency banners for high-acuity cases. HITL approval workflow is fully wired. Automated 50-case evaluation suite created, measuring completeness and safety compliance with metrics visible on the frontend dashboard.
+- **What's stuck:** Integrating heavy background noise suppression in Whisper (relying on browser-native Web Speech API for clean dictation capture, which works perfectly for desktop testing).
 - **Next week's 3 goals:**
-  1. Wire the end-to-end Python pipeline (dictation audio → FastAPI → structured SOAP note).
-  2. Integrate live drug interaction checking via RxNav public API.
-  3. Stand up the HTML/JS frontend workspace to display drafts and handle physician approvals.
+  1. Expand guidelines retrieval databases to include pediatric and psychiatric crisis protocols.
+  2. Integrate HL7/FHIR clinical message schema formats in note outputs.
+  3. Validate UI workflows with feedback from B2B platform test physicians.
