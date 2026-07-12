@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0052D4"/>
+      <stop offset="50%" stop-color="#4364F7"/>
+      <stop offset="100%" stop-color="#6FB1FC"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE"/>
+      <stop offset="100%" stop-color="#4FACFE"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#D946EF"/>
+    </linearGradient>
+    <linearGradient id="darkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    
+    <!-- Shadows -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#0B0F19" />
+
+  <!-- Title -->
+  <text x="400" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="bold" fill="#00F2FE" text-anchor="middle">MediMate — C4 System Context Diagram (Level 1)</text>
+  <text x="400" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94A3B8" text-anchor="middle">Overview of the clinical copilot environment and external dependencies</text>
+
+  <!-- User: Physician -->
+  <g filter="url(#shadow)">
+    <rect x="50" y="180" width="130" height="90" rx="10" fill="url(#blueGrad)" />
+    <text x="115" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Physician</text>
+    <text x="115" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#E2E8F0" text-anchor="middle">[Person]</text>
+    <text x="115" y="255" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Dictates or writes summaries</text>
+  </g>
+
+  <!-- MediMate Application Container -->
+  <g filter="url(#shadow)">
+    <rect x="290" y="160" width="220" height="130" rx="12" fill="url(#darkGrad)" stroke="#00F2FE" stroke-width="2" />
+    <text x="400" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="bold" fill="#00F2FE" text-anchor="middle">MediMate Copilot</text>
+    <text x="400" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">[Software System]</text>
+    <text x="400" y="245" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">Generates SOAP drafts, suggests</text>
+    <text x="400" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">ICD codes, flags drug risks</text>
+  </g>
+
+  <!-- RAG Vector DB (Qdrant) -->
+  <g filter="url(#shadow)">
+    <rect x="620" y="100" width="130" height="90" rx="10" fill="url(#tealGrad)" />
+    <text x="685" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">Qdrant DB</text>
+    <text x="685" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1E293B" text-anchor="middle">[Vector Storage]</text>
+    <text x="685" y="175" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#1E293B" text-anchor="middle">Clinical Guidelines</text>
+  </g>
+
+  <!-- External Drug APIs (RxNav) -->
+  <g filter="url(#shadow)">
+    <rect x="620" y="220" width="130" height="90" rx="10" fill="url(#purpleGrad)" />
+    <text x="685" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">RxNav API</text>
+    <text x="685" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#F3E8FF" text-anchor="middle">[External API]</text>
+    <text x="685" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#E9D5FF" text-anchor="middle">Drug interaction lookup</text>
+  </g>
+
+  <!-- Local JSON database -->
+  <g filter="url(#shadow)">
+    <rect x="335" y="380" width="130" height="80" rx="10" fill="url(#darkGrad)" stroke="#475569" stroke-width="1.5" />
+    <text x="400" y="415" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#E2E8F0" text-anchor="middle">Local JSON Files</text>
+    <text x="400" y="435" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">[Data Store]</text>
+    <text x="400" y="448" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B" text-anchor="middle">Saved Notes / Audit Logs</text>
+  </g>
+
+  <!-- Connectors -->
+  <!-- User to App -->
+  <path d="M 180 225 L 290 225" stroke="#94A3B8" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <polygon points="290,225 280,220 280,230" fill="#94A3B8" />
+  <text x="235" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Dictates audio</text>
+
+  <!-- App to Qdrant -->
+  <path d="M 510 190 L 620 160" stroke="#94A3B8" stroke-width="2" fill="none" />
+  <polygon points="620,160 608,162 613,171" fill="#94A3B8" />
+  <text x="565" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Queries</text>
+
+  <!-- App to RxNav -->
+  <path d="M 510 245 L 620 255" stroke="#94A3B8" stroke-width="2" fill="none" />
+  <polygon points="620,255 610,249 611,259" fill="#94A3B8" />
+  <text x="565" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Checks safety</text>
+
+  <!-- App to Local JSON -->
+  <path d="M 400 290 L 400 380" stroke="#94A3B8" stroke-width="2" fill="none" />
+  <polygon points="400,380 395,370 405,370" fill="#94A3B8" />
+  <text x="415" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8" text-anchor="left">Saves audits</text>
+
+</svg>
