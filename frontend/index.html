@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediMate — Clinical Copilot & SOAP Note Assistant</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="heartbeat-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="logo-text">
+          <h1>MediMate</h1>
+          <span>AI Clinical Copilot (E2 Domain Assistant)</span>
+        </div>
+      </div>
+      <div class="status-panel">
+        <div class="status-badge" id="api-status">
+          <span class="status-dot green"></span>
+          <span class="status-text">Hybrid Engine: Active</span>
+        </div>
+        <div class="status-badge" id="openai-status">
+          <span class="status-dot purple"></span>
+          <span class="status-text">Local Heuristics Fallback</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="workspace-grid">
+      
+      <!-- LEFT COLUMN: Patient Inputs -->
+      <section class="input-column">
+        <!-- Input Selector Card -->
+        <div class="glass-card input-card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-clipboard-user"></i> Patient Encounter</h2>
+            <div class="input-toggle">
+              <button class="toggle-btn active" id="toggle-voice"><i class="fa-solid fa-microphone"></i> Dictation</button>
+              <button class="toggle-btn" id="toggle-text"><i class="fa-solid fa-keyboard"></i> Text Summary</button>
+            </div>
+          </div>
+
+          <!-- Dictation Interface -->
+          <div class="input-body" id="voice-input-section">
+            <div class="dictation-zone">
+              <div class="pulse-ring" id="record-ring">
+                <button class="record-btn" id="record-button">
+                  <i class="fa-solid fa-microphone-lines" id="record-icon"></i>
+                </button>
+              </div>
+              <p class="dictation-status" id="record-status">Click to start recording dictation</p>
+              <div class="timer" id="record-timer">00:00</div>
+              <div class="wave-visualizer" id="wave-container">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Interface -->
+          <div class="input-body hidden" id="text-input-section">
+            <div class="text-entry-zone">
+              <label for="transcript-textarea">Input Doctor-Patient Dialogue or Summary:</label>
+              <textarea id="transcript-textarea" placeholder="Describe the encounter, e.g., 'Patient is a 45-year-old presenting with Stage 1 Hypertension... prescribe Lisinopril 10mg daily...'"></textarea>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="patient-meta">
+              <input type="text" id="patient-name" placeholder="Patient Name (Optional)" value="Anonymous Patient">
+            </div>
+            <button class="primary-btn" id="generate-btn">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Generate SOAP Note
+            </button>
+          </div>
+        </div>
+
+        <!-- Presets Selector -->
+        <div class="glass-card presets-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-folder-open"></i> Sample Clinical Presets</h3>
+          </div>
+          <div class="presets-grid">
+            <div class="preset-item" data-preset="htn">
+              <div class="preset-icon htn"><i class="fa-solid fa-heart"></i></div>
+              <div class="preset-info">
+                <h4>Stage 2 Hypertension</h4>
+                <p>BP 145/92, starts Lisinopril 10mg</p>
+              </div>
+            </div>
+            <div class="preset-item" data-preset="asthma">
+              <div class="preset-icon asthma"><i class="fa-solid fa-wind"></i></div>
+              <div class="preset-info">
+                <h4>Acute Asthma Exacerbation</h4>
+                <p>Childhood asthma, SABA overuse</p>
+              </div>
+            </div>
+            <div class="preset-item" data-preset="contrast">
+              <div class="preset-icon contrast"><i class="fa-solid fa-radiation"></i></div>
+              <div class="preset-info">
+                <h4>Metformin + Contrast</h4>
+                <p>Scheduled CT scan, renal risk</p>
+              </div>
+            </div>
+            <div class="preset-item" data-preset="chestpain">
+              <div class="preset-icon emergency"><i class="fa-solid fa-truck-medical"></i></div>
+              <div class="preset-info">
+                <h4>Acutely Ill: Chest Pain</h4>
+                <p>ACS signs, emergency safety rail</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: Output & HITL Verification -->
+      <section class="output-column">
+        
+        <!-- Emergency Refusal / Safety Alert Banner -->
+        <div class="safety-banner hidden" id="safety-alert">
+          <div class="safety-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+          <div class="safety-content">
+            <h4 id="safety-title">Safety Alert Triggered</h4>
+            <p id="safety-desc">High acuity clinical scenario detected. Standard outpatient diagnosis blocked.</p>
+          </div>
+        </div>
+
+        <!-- SOAP Editor Card -->
+        <div class="glass-card soap-card">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-stethoscope"></i> Structured SOAP Note Editor</h2>
+            <span class="badge" id="acuity-badge">Acuity: Normal</span>
+          </div>
+
+          <div class="soap-editor-tabs">
+            <button class="soap-tab active" data-sec="subjective">Subjective (S)</button>
+            <button class="soap-tab" data-sec="objective">Objective (O)</button>
+            <button class="soap-tab" data-sec="assessment">Assessment (A)</button>
+            <button class="soap-tab" data-sec="plan">Plan (P)</button>
+          </div>
+
+          <div class="soap-editor-body">
+            <div class="soap-sec-container" id="sec-subjective">
+              <textarea id="soap-subjective" placeholder="Subjective complaints, history, patient statements..."></textarea>
+            </div>
+            <div class="soap-sec-container hidden" id="sec-objective">
+              <textarea id="soap-objective" placeholder="Physical examination, vitals, labs, diagnostics..."></textarea>
+            </div>
+            <div class="soap-sec-container hidden" id="sec-assessment">
+              <textarea id="soap-assessment" placeholder="Assessment, clinical impressions, diagnostic rules..."></textarea>
+            </div>
+            <div class="soap-sec-container hidden" id="sec-plan">
+              <textarea id="soap-plan" placeholder="Treatment protocols, prescriptions, safety advice, follow-ups..."></textarea>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="disclaimer">
+              <i class="fa-solid fa-user-doctor"></i> HITL Mode: Doctor must review and edit before approving.
+            </div>
+            <button class="success-btn" id="approve-btn">
+              <i class="fa-solid fa-circle-check"></i> Approve & Save Note
+            </button>
+          </div>
+        </div>
+
+        <!-- Clinical Tool-use Panel -->
+        <div class="glass-card tools-card">
+          <div class="tools-tab-bar">
+            <button class="tool-tab active" data-tool="icd10"><i class="fa-solid fa-tags"></i> ICD-10 Codes</button>
+            <button class="tool-tab" data-tool="tests"><i class="fa-solid fa-flask"></i> Clinical Tests</button>
+            <button class="tool-tab" data-tool="drugs"><i class="fa-solid fa-pills"></i> Drug Safety</button>
+            <button class="tool-tab" data-tool="rag"><i class="fa-solid fa-database"></i> Clinical RAG Context</button>
+          </div>
+
+          <div class="tool-content-body">
+            <!-- ICD-10 Codes -->
+            <div class="tool-pane" id="pane-icd10">
+              <div class="tool-pane-header">
+                <h4>Suggested ICD-10-CM Codes</h4>
+                <button class="add-code-btn" id="btn-add-icd"><i class="fa-solid fa-plus"></i> Add custom</button>
+              </div>
+              <div class="icd-list" id="icd-container">
+                <p class="empty-state">No codes generated yet. Submit a case to suggest codes.</p>
+              </div>
+            </div>
+
+            <!-- Clinical Tests -->
+            <div class="tool-pane hidden" id="pane-tests">
+              <div class="tool-pane-header">
+                <h4>Recommended Diagnostic Pathways</h4>
+              </div>
+              <div class="tests-list" id="tests-container">
+                <p class="empty-state">No recommended tests yet.</p>
+              </div>
+            </div>
+
+            <!-- Drug Safety check -->
+            <div class="tool-pane hidden" id="pane-drugs">
+              <div class="tool-pane-header">
+                <h4>Automated Drug-Drug Interaction Screen</h4>
+              </div>
+              <div class="drugs-list" id="drugs-container">
+                <div class="drug-alert safe">
+                  <i class="fa-solid fa-circle-check"></i> No severe drug-drug interactions detected.
+                </div>
+              </div>
+            </div>
+
+            <!-- RAG Context -->
+            <div class="tool-pane hidden" id="pane-rag">
+              <div class="tool-pane-header">
+                <h4>Vector Guidelines Retrained (RAG Reference)</h4>
+              </div>
+              <div class="rag-list" id="rag-container">
+                <p class="empty-state">No context retrieved yet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM ROW: Timeline & Evaluations Dashboard -->
+    <section class="dashboard-section">
+      <div class="glass-card dashboard-card">
+        <div class="dashboard-tabs">
+          <button class="dash-tab active" data-tab="records"><i class="fa-solid fa-file-invoice"></i> Saved Patient Notes</button>
+          <button class="dash-tab" data-tab="eval"><i class="fa-solid fa-chart-line"></i> Automated Evaluation Suite</button>
+        </div>
+
+        <div class="dashboard-body">
+          <!-- Saved Records -->
+          <div class="dash-pane" id="dash-records">
+            <div class="records-header">
+              <h3>History of Saved, Doctor-Approved SOAP Records</h3>
+            </div>
+            <div class="records-timeline" id="records-container">
+              <p class="empty-state">No notes approved yet. Click "Approve & Save" to add records here.</p>
+            </div>
+          </div>
+
+          <!-- Evaluation Suite -->
+          <div class="dash-pane hidden" id="dash-eval">
+            <div class="eval-grid">
+              
+              <!-- Metrics Dashboard -->
+              <div class="eval-metrics-summary">
+                <div class="eval-intro">
+                  <h3>Clinical Quality & Safety Metrics (50-Case Suite)</h3>
+                  <p>Evaluates copilot performance on SOAP structure, diagnostic alignment, hallucination rates, and safety rails.</p>
+                  <button class="primary-btn" id="run-eval-btn"><i class="fa-solid fa-play"></i> Run 50-Sample Evaluation Pipeline</button>
+                </div>
+                
+                <div class="metrics-cards-grid">
+                  <div class="metric-card">
+                    <span class="m-title">SOAP Completeness</span>
+                    <span class="m-val" id="metric-soap">0%</span>
+                    <span class="m-sub">Matches [S, O, A, P] sections</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="m-title">ICD-10 Code Accuracy</span>
+                    <span class="m-val" id="metric-icd">0%</span>
+                    <span class="m-sub">Clinical taxonomy mapping</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="m-title">Safety Rail Compliance</span>
+                    <span class="m-val" id="metric-safety">0%</span>
+                    <span class="m-sub">Correct emergency block & disclaimer</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="m-title">Hallucination Rate</span>
+                    <span class="m-val text-green" id="metric-hallucination">0%</span>
+                    <span class="m-sub">Unverified diagnostics asserted</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Detailed Cases logs -->
+              <div class="eval-detail-table">
+                <div class="table-header">
+                  <h4>Evaluation Log (Detailed Case Outcomes)</h4>
+                  <div class="search-box">
+                    <input type="text" id="eval-search" placeholder="Search cases...">
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table class="styled-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Condition Domain</th>
+                        <th>Acuity</th>
+                        <th>SOAP Complete</th>
+                        <th>ICD-10 Suspected</th>
+                        <th>Safety Compliant</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="eval-table-body">
+                      <tr>
+                        <td colspan="7" class="text-center">No evaluation results loaded yet. Click the button to run metrics.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
