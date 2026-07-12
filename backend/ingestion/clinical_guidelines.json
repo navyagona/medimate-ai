@@ -1,0 +1,79 @@
+[
+  {
+    "id": "htn-001",
+    "condition": "Hypertension",
+    "category": "Diagnosis",
+    "title": "Classification of Blood Pressure Levels",
+    "content": "Blood pressure is classified as: Normal (<120/80 mmHg), Elevated (120-129/<80 mmHg), Stage 1 Hypertension (130-139 systolic or 80-89 diastolic mmHg), and Stage 2 Hypertension (>=140 systolic or >=90 diastolic mmHg). Diagnosis should be based on an average of 2 or more readings obtained on 2 or more occasions."
+  },
+  {
+    "id": "htn-002",
+    "condition": "Hypertension",
+    "category": "Treatment",
+    "title": "First-line Pharmacotherapy",
+    "content": "For Stage 1 Hypertension with 10-year CVD risk >=10%, start a single antihypertensive agent. First-line agents include thiazide diuretics, Calcium Channel Blockers (CCBs), ACE inhibitors (ACEi), or Angiotensin Receptor Blockers (ARBs). For Stage 2 Hypertension, initiate therapy with two first-line agents of different classes (e.g., ACEi + CCB)."
+  },
+  {
+    "id": "htn-003",
+    "condition": "Hypertension",
+    "category": "Safety",
+    "title": "Contraindications & Side Effects",
+    "content": "ACE inhibitors and ARBs are strictly contraindicated in pregnancy due to fetal toxicity. Never combine an ACEi and an ARB together due to risk of hyperkalemia, acute kidney injury, and hypotension. Common CCB side effects include peripheral edema; ACEi side effects include a dry cough and angioedema."
+  },
+  {
+    "id": "t2d-001",
+    "condition": "Type 2 Diabetes",
+    "category": "Diagnosis",
+    "title": "Diagnostic Criteria for Diabetes",
+    "content": "Diagnostic criteria for Type 2 Diabetes Mellitus include: Hemoglobin A1c (HbA1c) >= 6.5%, Fasting Plasma Glucose >= 126 mg/dL (7.0 mmol/L) after an 8-hour fast, or 2-hour Postprandial Glucose >= 200 mg/dL (11.1 mmol/L) during an Oral Glucose Tolerance Test (OGTT). A random plasma glucose >= 200 mg/dL with classic hyperglycemic symptoms also confirms diagnosis."
+  },
+  {
+    "id": "t2d-002",
+    "condition": "Type 2 Diabetes",
+    "category": "Treatment",
+    "title": "Pharmacological Management Guidelines",
+    "content": "First-line therapy for type 2 diabetes is Metformin unless contraindicated (e.g., eGFR < 30 mL/min/1.73m2). If HbA1c is >= 1.5% above target, start dual therapy. Select secondary agents based on comorbidities: SGLT2 inhibitors or GLP-1 receptor agonists are preferred for patients with established atherosclerotic cardiovascular disease (ASCVD), heart failure (HF), or chronic kidney disease (CKD)."
+  },
+  {
+    "id": "t2d-003",
+    "condition": "Type 2 Diabetes",
+    "category": "Safety",
+    "title": "Metformin Safety & Lactic Acidosis",
+    "content": "Metformin can cause rare but severe lactic acidosis. It is contraindicated in patients with severe renal impairment (eGFR < 30), severe hepatic dysfunction, or acute heart failure. Metformin should be temporarily discontinued prior to and for 48 hours after iodinated contrast imaging studies to prevent contrast-induced nephropathy."
+  },
+  {
+    "id": "asthma-001",
+    "condition": "Asthma",
+    "category": "Diagnosis",
+    "title": "Diagnosis and Severity Assessment",
+    "content": "Asthma is diagnosed by history of variable respiratory symptoms (wheeze, shortness of breath, chest tightness, cough) and documented variable expiratory airflow limitation (e.g., FEV1/FVC ratio < 0.75-0.80, or positive bronchodilator reversibility test of FEV1 increase by >12% and >200mL)."
+  },
+  {
+    "id": "asthma-002",
+    "condition": "Asthma",
+    "category": "Treatment",
+    "title": "GINA Stepwise Management",
+    "content": "In line with GINA guidelines, all adults with asthma should receive ICS (Inhaled Corticosteroid)-containing controller therapy to reduce risk of severe exacerbations. Step 1 & 2: As-needed low-dose ICS-formoterol (preferred) or low-dose ICS whenever SABA (e.g. Albuterol) is taken. Step 3: Daily low-dose ICS-LABA (e.g., Budesonide-Formoterol). Step 4: Medium-dose ICS-LABA controller."
+  },
+  {
+    "id": "gastro-001",
+    "condition": "Acute Gastroenteritis",
+    "category": "Treatment",
+    "title": "Hydration and Symptom Management",
+    "content": "The cornerstone of gastroenteritis management is oral rehydration therapy (ORT) with oral rehydration salts (ORS) solutions. Routine anti-motility agents (e.g., loperamide) should be avoided in cases of bloody diarrhea or high fever, as they can prolong illness and trigger toxic megacolon. Ondansetron can be used for significant vomiting to facilitate ORT."
+  },
+  {
+    "id": "emerg-001",
+    "condition": "Emergency Medicine",
+    "category": "Safety",
+    "title": "Acute Chest Pain / Myocardial Infarction",
+    "content": "Any patient presenting with acute substernal chest pain radiating to the left arm, neck, or jaw, or chest pressure accompanied by diaphoresis, shortness of breath, or nausea must be evaluated immediately for Acute Coronary Syndrome (ACS). Perform an immediate 12-lead ECG (target within 10 minutes) and draw cardiac troponins. Administer Aspirin 162-325 mg chewed immediately, call emergency services, and arrange urgent transfer to a cardiac catheterization lab if STEMI is detected."
+  },
+  {
+    "id": "emerg-002",
+    "condition": "Emergency Medicine",
+    "category": "Safety",
+    "title": "Stroke / Acute Neurological Deficit",
+    "content": "For sudden onset of focal neurological deficits (facial droop, arm drift, abnormal speech - FAST), immediately activate emergency protocols. Establish last known well time. Arrange urgent non-contrast head CT scan to rule out hemorrhage. Avoid lowering blood pressure unless >220/120 mmHg, unless the patient is a candidate for IV thrombolysis (Alteplase/Tenecteplase) within 4.5 hours of onset."
+  }
+]
