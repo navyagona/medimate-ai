@@ -14,11 +14,11 @@ CLINICAL_MOCK_TRANSCRIPTS = [
     "A 28-year-old male presents with acute onset watery diarrhea and moderate vomiting for the last 24 hours. He denies bloody stools or high fevers. He reports feeling lightheaded. On exam, mucous membranes are slightly dry. We will initiate oral rehydration therapy with ORS and prescribe Ondansetron 4 mg as needed for nausea. Loperamide was advised against."
 ]
 
-def transcribe_audio_file(file_path: str) -> str:
+def transcribe_audio_file(file_path: str) -> tuple:
     """Sends audio to OpenAI Whisper API, falls back to mock transcript if key has no quota."""
     if not IS_API_KEY_VALID:
         logger.info("No valid OpenAI API Key. Returning fallback clinical simulation transcript.")
-        return CLINICAL_MOCK_TRANSCRIPTS[0]
+        return CLINICAL_MOCK_TRANSCRIPTS[0], True
         
     try:
         with open(file_path, "rb") as audio_file:
@@ -27,10 +27,11 @@ def transcribe_audio_file(file_path: str) -> str:
                 file=audio_file
             )
         logger.info("Audio transcribed successfully via OpenAI Whisper API.")
-        return response.text
+        return response.text, False
     except Exception as e:
         logger.warning(f"OpenAI Whisper transcription failed ({e}). Using simulated clinical audio fallback.")
         # Return fallback based on hash of filepath to ensure consistency
         idx = hash(file_path) % len(CLINICAL_MOCK_TRANSCRIPTS)
-        return CLINICAL_MOCK_TRANSCRIPTS[idx]
+        return CLINICAL_MOCK_TRANSCRIPTS[idx], True
+
 

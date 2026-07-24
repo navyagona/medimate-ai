@@ -23,9 +23,9 @@ async def transcribe(audio: UploadFile = File(...)):
         with open(temp_path, "wb") as buffer:
             shutil.copyfileobj(audio.file, buffer)
             
-        transcript_text = transcribe_audio_file(temp_path)
+        transcript_text, fallback_used = transcribe_audio_file(temp_path)
         logger.info(f"Successfully processed audio upload ({audio.filename})")
-        return {"text": transcript_text}
+        return {"text": transcript_text, "fallbackUsed": fallback_used}
     except Exception as e:
         logger.error(f"Error during audio upload transcription: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Transcription service failure.")

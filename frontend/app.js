@@ -212,11 +212,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await res.json();
       
       if (data.text) {
-        // Populate the textarea with the transcription
-        transcriptTextarea.value = data.text;
-        recordStatus.textContent = data.fallbackUsed 
-          ? `Transcribed (Local Simulation): Completed`
-          : `Transcribed (Whisper-1): Completed`;
+        // If fallback was used but browser SpeechRecognition already captured real speech, prefer it.
+        const currentText = transcriptTextarea.value.trim();
+        if (data.fallbackUsed && currentText.length > 0) {
+          recordStatus.textContent = `Transcribed (Browser WebSpeech API): Completed (Whisper fallback bypassed)`;
+        } else {
+          // Populate the textarea with the simulation/Whisper transcription
+          transcriptTextarea.value = data.text;
+          recordStatus.textContent = data.fallbackUsed 
+            ? `Transcribed (Local Simulation): Completed`
+            : `Transcribed (Whisper-1): Completed`;
+        }
         
         // Auto-switch to text input mode to allow edits
         activeInputType = 'text';
