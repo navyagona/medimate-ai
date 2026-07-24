@@ -15,8 +15,6 @@ An AI medical copilot that turns a doctor-patient conversation (audio or text) i
 | **Target roles** | AI Product Engineer · Applied AI Engineer · GenAI Full-Stack Engineer |
 | **Repo** | https://github.com/navyagona/medimate-ai |
 | **Live Deployment URL** | [medimate-ai.onrender.com](https://medimate-ai.onrender.com) |
-| **Walkthrough Video** | [Loom Product Walkthrough](https://www.loom.com/share/placeholder_link_id) |
-| **Hardening Artifacts** | [Status One-Pager](./docs/STATUS_ONE_PAGER.md) · [Thinking Artifact](./docs/THINKING_ARTIFACT.md) · [Resume Bullets](./docs/RESUME_BULLETS.md) |
 
 ---
 
