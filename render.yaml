@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: medimate-ai
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: LOG_LEVEL
+        value: INFO
+      - key: OPENAI_API_KEY
+        sync: false # Set manually in Render dashboard
+      - key: QDRANT_HOST
+        value: localhost
+      - key: QDRANT_PORT
+        value: 6333

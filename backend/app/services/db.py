@@ -1,6 +1,9 @@
 import os
 import json
 import random
+import logging
+
+logger = logging.getLogger(__name__)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 NOTES_PATH = os.path.join(BASE_DIR, "backend", "data", "saved_notes.json")
@@ -19,7 +22,8 @@ def get_saved_notes() -> list:
     try:
         with open(NOTES_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
-    except Exception:
+    except Exception as e:
+        logger.error(f"Failed to read saved notes from {NOTES_PATH}: {e}", exc_info=True)
         return []
 
 def save_patient_note(note_data: dict) -> dict:
@@ -51,7 +55,8 @@ def get_eval_results_db() -> dict:
     try:
         with open(EVALS_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
-    except Exception:
+    except Exception as e:
+        logger.error(f"Failed to read evaluation results from {EVALS_PATH}: {e}", exc_info=True)
         return {}
 
 def save_eval_results_db(results: dict) -> dict:
@@ -59,3 +64,4 @@ def save_eval_results_db(results: dict) -> dict:
     with open(EVALS_PATH, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     return results
+

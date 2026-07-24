@@ -1,10 +1,13 @@
 import os
 import json
 import hashlib
+import logging
 import numpy as np
 from openai import OpenAI
 from qdrant_client import QdrantClient
 from app.config import OPENAI_API_KEY, QDRANT_HOST, QDRANT_PORT, IS_API_KEY_VALID
+
+logger = logging.getLogger(__name__)
 
 # Paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -54,10 +57,10 @@ def get_embedding(text: str) -> list:
     except Exception as e:
         error_msg = str(e).lower()
         if "quota" in error_msg or "limit" in error_msg or "429" in error_msg or "billing" in error_msg:
-            print("⚠️ OpenAI quota limit detected. Dynamic failover to offline embeddings activated.")
+            logger.warning("OpenAI quota limit detected. Dynamic failover to offline embeddings activated.")
             _api_quota_exceeded = True
         else:
-            print(f"⚠️ OpenAI embedding failed: {e}. Using local fallback.")
+            logger.warning(f"OpenAI embedding failed: {e}. Using local fallback.")
         return get_fallback_embedding(text)
 
 def cosine_similarity(v1, v2) -> float:
@@ -99,11 +102,11 @@ def retrieve_guidelines(query_text: str, limit: int = 3) -> list:
                         "content": payload.get("content"),
                         "score": hit.score
                     })
-                print("🚀 Guidelines retrieved via local Qdrant Vector DB.")
+                logger.info("Guidelines retrieved via local Qdrant Vector DB.")
                 return retrieved
         except Exception as e:
             # Fallback to local file-based database if Qdrant fails
-            print(f"⚠️ Qdrant unreachable. Dynamic failover to local search activated. Error: {e}")
+            logger.warning(f"Qdrant unreachable. Dynamic failover to local search activated. Error: {e}")
             _qdrant_offline = True
         
     # 2. Try Local Vector DB File
@@ -125,10 +128,11 @@ def retrieve_guidelines(query_text: str, limit: int = 3) -> list:
             
         # Sort descending and return top limit
         scored.sort(key=lambda x: x["score"], reverse=True)
+        logger.info(f"Retrieved top {len(scored[:limit])} guidelines via local vector file fallback.")
         return scored[:limit]
         
     # 3. Last fallback: direct raw keywords search if no vector file exists
-    print("⚠️ Vector DB file not found. Falling back to simple keyword matching.")
+    logger.warning("Vector DB file not found. Falling back to simple keyword matching.")
     if os.path.exists(GUIDELINES_RAW_PATH):
         with open(GUIDELINES_RAW_PATH, "r", encoding="utf-8") as f:
             raw_guidelines = json.load(f)
@@ -147,3 +151,4 @@ def retrieve_guidelines(query_text: str, limit: int = 3) -> list:
         return scored[:limit]
         
     return []
+

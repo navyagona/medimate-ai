@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import logging
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 
@@ -10,29 +11,31 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app.config import QDRANT_HOST, QDRANT_PORT
 from app.services.rag import get_embedding, GUIDELINES_RAW_PATH, GUIDELINES_VECTOR_PATH
 
+logger = logging.getLogger(__name__)
+
 def run_ingestion():
-    import sys
     try:
         sys.stdout.reconfigure(encoding='utf-8')
-    except Exception:
-        pass
-    print("=== MediMate Clinical Guidelines Ingestion System ===")
+    except Exception as e:
+        logger.debug(f"stdout encoding reconfiguration ignored: {e}")
+
+    logger.info("=== MediMate Clinical Guidelines Ingestion System ===")
     
     # 1. Read raw guidelines
     if not os.path.exists(GUIDELINES_RAW_PATH):
-        print(f"❌ Error: Raw guidelines not found at: {GUIDELINES_RAW_PATH}")
+        logger.error(f"Raw guidelines not found at: {GUIDELINES_RAW_PATH}")
         sys.exit(1)
         
     with open(GUIDELINES_RAW_PATH, "r", encoding="utf-8") as f:
         guidelines = json.load(f)
         
-    print(f"Loaded {len(guidelines)} guideline chunks. Processing embeddings...")
+    logger.info(f"Loaded {len(guidelines)} guideline chunks. Processing embeddings...")
     
     vectorized_db = []
     points = []
     
     for i, chunk in enumerate(guidelines):
-        print(f"[{i+1}/{len(guidelines)}] Embedding: {chunk['id']} - {chunk['title']}")
+        logger.info(f"[{i+1}/{len(guidelines)}] Embedding: {chunk['id']} - {chunk['title']}")
         embedding_text = f"Condition: {chunk['condition']}\nCategory: {chunk['category']}\nTitle: {chunk['title']}\nContent: {chunk['content']}"
         
         # Embed
@@ -57,10 +60,10 @@ def run_ingestion():
     # Save local vector file (fallback RAG)
     with open(GUIDELINES_VECTOR_PATH, "w", encoding="utf-8") as f:
         json.dump(vectorized_db, f, indent=2, ensure_ascii=False)
-    print(f"💾 Local fallback vector DB cached successfully at: {GUIDELINES_VECTOR_PATH}")
+    logger.info(f"Local fallback vector DB cached successfully at: {GUIDELINES_VECTOR_PATH}")
     
     # 2. Try pushing to Qdrant container
-    print(f"Connecting to Qdrant at {QDRANT_HOST}:{QDRANT_PORT}...")
+    logger.info(f"Connecting to Qdrant at {QDRANT_HOST}:{QDRANT_PORT}...")
     try:
         q_client = QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT, timeout=3.0)
         
@@ -75,12 +78,13 @@ def run_ingestion():
             collection_name="guidelines",
             points=points
         )
-        print("🚀 Successfully uploaded vector collections to Qdrant Docker Database!")
+        logger.info("Successfully uploaded vector collections to Qdrant Docker Database!")
     except Exception as e:
-        print(f"⚠️ Qdrant connection failed ({e}). Ingestion only completed in local fallback vector file.")
-        print("Note: The application will run successfully using the offline local vector database.")
+        logger.warning(f"Qdrant connection failed ({e}). Ingestion completed in local fallback vector file.")
+        logger.info("Note: The application will run successfully using the offline local vector database.")
         
-    print("=== Ingestion Finished ===")
+    logger.info("=== Ingestion Finished ===")
 
 if __name__ == "__main__":
     run_ingestion()
+

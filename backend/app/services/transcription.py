@@ -1,6 +1,9 @@
 import os
+import logging
 from openai import OpenAI
 from app.config import OPENAI_API_KEY, IS_API_KEY_VALID
+
+logger = logging.getLogger(__name__)
 
 openai_client = OpenAI(api_key=OPENAI_API_KEY if IS_API_KEY_VALID else "dummy_key")
 
@@ -14,7 +17,7 @@ CLINICAL_MOCK_TRANSCRIPTS = [
 def transcribe_audio_file(file_path: str) -> str:
     """Sends audio to OpenAI Whisper API, falls back to mock transcript if key has no quota."""
     if not IS_API_KEY_VALID:
-        print("⚠️ No valid OpenAI API Key. Returning fallback clinical simulation.")
+        logger.info("No valid OpenAI API Key. Returning fallback clinical simulation transcript.")
         return CLINICAL_MOCK_TRANSCRIPTS[0]
         
     try:
@@ -23,10 +26,11 @@ def transcribe_audio_file(file_path: str) -> str:
                 model="whisper-1",
                 file=audio_file
             )
-        print("🚀 Audio transcribed successfully via OpenAI Whisper.")
+        logger.info("Audio transcribed successfully via OpenAI Whisper API.")
         return response.text
     except Exception as e:
-        print(f"⚠️ OpenAI Whisper transcription failed (quota/limits): {e}. Using simulated clinical audio fallback.")
+        logger.warning(f"OpenAI Whisper transcription failed ({e}). Using simulated clinical audio fallback.")
         # Return fallback based on hash of filepath to ensure consistency
         idx = hash(file_path) % len(CLINICAL_MOCK_TRANSCRIPTS)
         return CLINICAL_MOCK_TRANSCRIPTS[idx]
+

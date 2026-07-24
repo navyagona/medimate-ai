@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import logging
 from openai import OpenAI
 from app.config import OPENAI_API_KEY, IS_API_KEY_VALID
 import app.services.rag as rag
@@ -8,12 +9,15 @@ from app.services.drug_interactions import check_drug_safety
 from app.services.icd10 import search_icd10_codes, ICD10_CODES_DB
 from app.models.schemas import SoapGenerationResponse, SoapNote, ICD10Suggestion
 
+logger = logging.getLogger(__name__)
+
 openai_client = OpenAI(api_key=OPENAI_API_KEY if IS_API_KEY_VALID else "dummy_key", max_retries=0)
 
 # Guidelines retrieval will use rag.retrieve_guidelines
 
 def run_offline_clinical_expert_system(transcript: str) -> dict:
     """Offline Python expert system using keyword extraction, guideline retrieval, and clinical logic."""
+    logger.info("Executing offline clinical expert system rules engine...")
     text_lower = transcript.lower()
     
     # 1. Retrieve RAG guidelines context
@@ -211,12 +215,14 @@ Return ONLY valid JSON."""
         
         parsed = json.loads(response.choices[0].message.content)
         parsed["relevantGuidelines"] = [{"id": g["id"], "title": g["title"], "condition": g["condition"]} for g in guidelines]
+        logger.info("Successfully generated clinical SOAP note via gpt-4o-mini")
         return parsed
     except Exception as e:
         error_msg = str(e).lower()
         if "quota" in error_msg or "limit" in error_msg or "429" in error_msg or "billing" in error_msg:
-            print("⚠️ OpenAI quota limit detected. Dynamic failover to offline expert system activated.")
+            logger.warning("OpenAI quota limit detected. Dynamic failover to offline expert system activated.")
             rag._api_quota_exceeded = True
         else:
-            print(f"⚠️ OpenAI agent call failed: {e}. Falling back to offline clinical expert system.")
+            logger.warning(f"OpenAI agent call failed: {e}. Falling back to offline clinical expert system.")
         return run_offline_clinical_expert_system(transcript)
+

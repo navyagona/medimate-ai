@@ -1,6 +1,9 @@
 import urllib.request
 import urllib.parse
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 DRUG_INTERACTIONS_DB = [
     {
@@ -68,7 +71,7 @@ def fetch_rxcui(drug_name: str) -> str:
             if rxnorm_ids:
                 return rxnorm_ids[0]
     except Exception as e:
-        print(f"⚠️ RxNav API unreachable or timed out. Bypassing subsequent live drug checks. Error: {e}")
+        logger.warning(f"RxNav API unreachable or timed out ({e}). Activating offline fallback mode for drug interaction checks.")
         _rxnav_offline = True
     return None
 
@@ -105,8 +108,8 @@ def check_rxnav_interactions(drugs_list: list) -> list:
                         severity = pair.get("severity", "N/A").upper()
                         warnings.append(f"RxNav API ({severity}): {desc}")
             return warnings
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Failed to fetch or parse RxNav interaction list for CUIs {rxcuis}: {e}")
         
     return []
 
@@ -122,3 +125,4 @@ def check_drug_safety(drugs_list: list) -> list:
             warnings.append(warning)
             
     return warnings
+
